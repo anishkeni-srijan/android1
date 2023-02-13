@@ -7,6 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+<!--<androidx.fragment.app.FragmentContainerView  android:layout_height="match_parent" android:layout_width="match_parent"-->
+<!--    android:name="androidx.navigation.fragment.NavHostFragment" android:id="@+id/fragment_container_view_tag">-->
 
     <TextView
         android:id="@+id/textview"
@@ -32,5 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        />
+
+<!--</androidx.fragment.app.FragmentContainerView>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

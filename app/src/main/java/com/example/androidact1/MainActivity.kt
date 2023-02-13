@@ -2,10 +2,12 @@ package com.example.androidact1
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.TextView
 
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.androidact1.databinding.ActivityMainBinding
 
 import retrofit2.Call
 import retrofit2.Response
@@ -13,20 +15,22 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var  binding:ActivityMainBinding
+     lateinit var button:Button
+     lateinit var text: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
+       button = findViewById(R.id.getFactButton)
+       text = findViewById(R.id.textview)
 
-        binding.getFactButton.setOnClickListener {
+        button.setOnClickListener {
             fetchData()
         }
     }
 
     private fun fetchData(){
-        println("here")
+
         val progressDialog = ProgressDialog(this)
         progressDialog.setMessage("wait...")
         progressDialog.show()
@@ -36,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 call: Call<FactDataClass?>,
                 response: Response<FactDataClass?>
             ) {
-                binding.textview.text = response.body()?.text
+                text.text = response.body()?.text
 
                 progressDialog.dismiss()
 
