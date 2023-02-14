@@ -1,9 +1,9 @@
 package com.example.androidact1
 
-import android.app.ProgressDialog
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 
 import android.widget.Toast
@@ -17,38 +17,40 @@ class MainActivity : AppCompatActivity() {
 
      lateinit var button:Button
      lateinit var text: TextView
+     lateinit var  spinner: ProgressBar
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
        button = findViewById(R.id.getFactButton)
        text = findViewById(R.id.textview)
+        spinner = findViewById(R.id.progressBar1)
 
+        spinner.visibility = View.GONE
         button.setOnClickListener {
+           spinner.visibility = View.VISIBLE
             fetchData()
         }
     }
 
     private fun fetchData(){
 
-        val progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("wait...")
-        progressDialog.show()
-
          RetrofitInstance.apiInterface.getData().enqueue(object : retrofit2.Callback<FactDataClass?> {
             override fun onResponse(
                 call: Call<FactDataClass?>,
                 response: Response<FactDataClass?>
             ) {
+               spinner.visibility = View.GONE
                 text.text = response.body()?.text
 
-                progressDialog.dismiss()
+
 
             }
 
             override fun onFailure(call: Call<FactDataClass?>, t: Throwable) {
-                progressDialog.dismiss()
-                Toast.makeText(this@MainActivity, "${t.localizedMessage}",Toast.LENGTH_SHORT).show()
+                spinner.visibility = View.GONE
+                Toast.makeText(this@MainActivity, t.localizedMessage,Toast.LENGTH_SHORT).show()
             }
         })
 
