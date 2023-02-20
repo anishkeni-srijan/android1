@@ -1,4 +1,4 @@
-package com.example.androidact1
+package com.example.androidact1.model
 
 data class FactDataClass(
     val id: String,

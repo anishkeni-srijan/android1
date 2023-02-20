@@ -1,4 +1,4 @@
-package com.example.androidact1
+package com.example.androidact1.networking
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

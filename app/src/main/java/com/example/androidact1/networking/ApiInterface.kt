@@ -1,5 +1,6 @@
-package com.example.androidact1
+package com.example.androidact1.networking
 
+import com.example.androidact1.model.FactDataClass
 import retrofit2.Call
 import retrofit2.http.GET
 
