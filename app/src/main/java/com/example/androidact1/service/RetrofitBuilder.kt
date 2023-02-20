@@ -1,9 +1,9 @@
-package com.example.androidact1
+package com.example.androidact1.service
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitInstance {
+object RetrofitBuilder {
     private val retrofit by lazy{
         Retrofit.Builder()
             .baseUrl("https://uselessfacts.jsph.pl/")
@@ -11,7 +11,7 @@ object RetrofitInstance {
             .build()
     }
 
-    val apiInterface: ApiInterface by lazy {
-        retrofit.create(ApiInterface::class.java)
+    val apiInterface: ApiService by lazy {
+        retrofit.create(ApiService::class.java)
     }
 }

@@ -7,13 +7,18 @@ import android.widget.ProgressBar
 import android.widget.TextView
 
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 import retrofit2.Call
 import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
+     private val viewModel:MainViewModel by viewModels()
 
      lateinit var button:Button
      lateinit var text: TextView
@@ -34,25 +39,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun fetchData(){
-
-         RetrofitInstance.apiInterface.getData().enqueue(object : retrofit2.Callback<FactDataClass?> {
-            override fun onResponse(
-                call: Call<FactDataClass?>,
-                response: Response<FactDataClass?>
-            ) {
-               spinner.visibility = View.GONE
-                text.text = response.body()?.text
-
-
-
-            }
-
-            override fun onFailure(call: Call<FactDataClass?>, t: Throwable) {
-                spinner.visibility = View.GONE
-                Toast.makeText(this@MainActivity, t.localizedMessage,Toast.LENGTH_SHORT).show()
-            }
-        })
+    private fun fetchData() {
+        lifecycleScope.launch {
+            val fact = viewModel.getFact()
+            spinner.visibility = View.GONE
+            text.text = fact.text
+        }
 
     }
 }
